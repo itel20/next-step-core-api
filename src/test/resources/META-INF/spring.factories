@@ -1,0 +1,4 @@
+org.springframework.test.context.ContextCustomizerFactory = com.nextstepsenegal.\
+    app.config.SqlTestContainersSpringContextCustomizerFactory,com.\
+    nextstepsenegal.app.config.TestContainersSpringContextCustomizerFactory,com.\
+    nextstepsenegal.app.config.KafkaTestContainersSpringContextCustomizerFactory
