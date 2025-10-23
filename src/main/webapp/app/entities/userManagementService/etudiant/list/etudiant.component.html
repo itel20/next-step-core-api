@@ -1,0 +1,268 @@
+<div>
+  <h2 id="page-heading" data-cy="EtudiantHeading">
+    <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.home.title">Etudiants</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-etudiant"
+        [routerLink]="['/usermanagementservice/etudiant/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.home.createLabel"
+          >Créer un nouveau Etudiant</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.home.search"
+          >Recherche pour Etudiant</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'userManagementServiceApp.userManagementServiceEtudiant.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (etudiants?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.home.notFound">Aucun Etudiant trouvé</span>
+    </div>
+  }
+
+  @if (etudiants && etudiants.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.nom">Nom</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prenom">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.prenom">Prenom</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateNaissance">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.dateNaissance">Date Naissance</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telephone">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.telephone">Telephone</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="adresse">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.adresse">Adresse</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.email">Email</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="typeBac">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.typeBac">Type Bac</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="anneeBac">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.anneeBac">Annee Bac</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="niveauDetudes">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.niveauDetudes">Niveau Detudes</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="universiteSouhaitee">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.universiteSouhaitee">Universite Souhaitee</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="specialiteSouhaitee">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.specialiteSouhaitee">Specialite Souhaitee</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="password">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.password">Password</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="passwordHash">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.passwordHash">Password Hash</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="keycloakId">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.keycloakId">Keycloak Id</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="user.login">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (etudiant of etudiants; track trackId(etudiant)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/usermanagementservice/etudiant', etudiant.id, 'view']">{{ etudiant.id }}</a>
+              </td>
+              <td>{{ etudiant.nom }}</td>
+              <td>{{ etudiant.prenom }}</td>
+              <td>{{ etudiant.dateNaissance | formatMediumDate }}</td>
+              <td>{{ etudiant.telephone }}</td>
+              <td>{{ etudiant.adresse }}</td>
+              <td>{{ etudiant.email }}</td>
+              <td>{{ etudiant.typeBac }}</td>
+              <td>{{ etudiant.anneeBac }}</td>
+              <td>{{ etudiant.niveauDetudes }}</td>
+              <td>{{ etudiant.universiteSouhaitee }}</td>
+              <td>{{ etudiant.specialiteSouhaitee }}</td>
+              <td>{{ etudiant.password }}</td>
+              <td>{{ etudiant.passwordHash }}</td>
+              <td>{{ etudiant.keycloakId }}</td>
+              <td>
+                {{ etudiant.user?.login }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/usermanagementservice/etudiant', etudiant.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/usermanagementservice/etudiant', etudiant.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(etudiant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (etudiants && etudiants.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

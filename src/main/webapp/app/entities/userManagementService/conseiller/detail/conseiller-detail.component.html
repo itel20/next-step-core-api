@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (conseiller(); as conseillerRef) {
+      <div>
+        <h2 data-cy="conseillerDetailsHeading">
+          <span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.detail.title">Conseiller</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ conseillerRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.nom">Nom</span></dt>
+          <dd>
+            <span>{{ conseillerRef.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.prenom">Prenom</span></dt>
+          <dd>
+            <span>{{ conseillerRef.prenom }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.specialite">Specialite</span></dt>
+          <dd>
+            <span>{{ conseillerRef.specialite }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.email">Email</span></dt>
+          <dd>
+            <span>{{ conseillerRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.description">Description</span></dt>
+          <dd>
+            <span>{{ conseillerRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.certifie">Certifie</span></dt>
+          <dd>
+            <span>{{ conseillerRef.certifie }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.password">Password</span></dt>
+          <dd>
+            <span>{{ conseillerRef.password }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.passwordHash">Password Hash</span></dt>
+          <dd>
+            <span>{{ conseillerRef.passwordHash }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.keycloakId">Keycloak Id</span></dt>
+          <dd>
+            <span>{{ conseillerRef.keycloakId }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.user">User</span></dt>
+          <dd>
+            <span>{{ conseillerRef.user?.login }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/usermanagementservice/conseiller', conseillerRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

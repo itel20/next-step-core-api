@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (etudiant(); as etudiantRef) {
+      <div>
+        <h2 data-cy="etudiantDetailsHeading">
+          <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.detail.title">Etudiant</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ etudiantRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.nom">Nom</span></dt>
+          <dd>
+            <span>{{ etudiantRef.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.prenom">Prenom</span></dt>
+          <dd>
+            <span>{{ etudiantRef.prenom }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.dateNaissance">Date Naissance</span></dt>
+          <dd>
+            <span>{{ etudiantRef.dateNaissance | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.telephone">Telephone</span></dt>
+          <dd>
+            <span>{{ etudiantRef.telephone }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.adresse">Adresse</span></dt>
+          <dd>
+            <span>{{ etudiantRef.adresse }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.email">Email</span></dt>
+          <dd>
+            <span>{{ etudiantRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.typeBac">Type Bac</span></dt>
+          <dd>
+            <span>{{ etudiantRef.typeBac }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.anneeBac">Annee Bac</span></dt>
+          <dd>
+            <span>{{ etudiantRef.anneeBac }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.niveauDetudes">Niveau Detudes</span></dt>
+          <dd>
+            <span>{{ etudiantRef.niveauDetudes }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.universiteSouhaitee">Universite Souhaitee</span>
+          </dt>
+          <dd>
+            <span>{{ etudiantRef.universiteSouhaitee }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.specialiteSouhaitee">Specialite Souhaitee</span>
+          </dt>
+          <dd>
+            <span>{{ etudiantRef.specialiteSouhaitee }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.password">Password</span></dt>
+          <dd>
+            <span>{{ etudiantRef.password }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.passwordHash">Password Hash</span></dt>
+          <dd>
+            <span>{{ etudiantRef.passwordHash }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.keycloakId">Keycloak Id</span></dt>
+          <dd>
+            <span>{{ etudiantRef.keycloakId }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServiceEtudiant.user">User</span></dt>
+          <dd>
+            <span>{{ etudiantRef.user?.login }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/usermanagementservice/etudiant', etudiantRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -126,4 +126,13 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+  kc-password: admin
+  kc-user: admin
+  kc-client-id: nextstepsenegal
+  kc-client-secret: 1QcnQOgbchm2OTQDaZERxy80PnTzLHoH
+  kc-url: 'http://localhost:9080/realms/master/protocol/openid-connect/token'
+  kc-role: 'http://localhost:9080/admin/realms/jhipster/roles'
+  kc-url1: 'http://localhost:9080/admin/realms/jhipster/users'
+  kc-base-url: 'http://localhost:9080'
+  kc-realm: 'master'

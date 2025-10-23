@@ -1,0 +1,193 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-conseiller-heading"
+        data-cy="ConseillerCreateUpdateHeading"
+        jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.home.createOrEditLabel"
+      >
+        Créer ou éditer un Conseiller
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nomRef = editForm.get('nom')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_nom" jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          @if (nomRef.invalid && (nomRef.dirty || nomRef.touched)) {
+            <div>
+              @if (editForm.get('nom')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let prenomRef = editForm.get('prenom')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_prenom" jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.prenom"
+            >Prenom</label
+          >
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+          @if (prenomRef.invalid && (prenomRef.dirty || prenomRef.touched)) {
+            <div>
+              @if (editForm.get('prenom')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let specialiteRef = editForm.get('specialite')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_specialite"
+            jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.specialite"
+            >Specialite</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="specialite"
+            id="field_specialite"
+            data-cy="specialite"
+            formControlName="specialite"
+          />
+          @if (specialiteRef.invalid && (specialiteRef.dirty || specialiteRef.touched)) {
+            <div>
+              @if (editForm.get('specialite')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let emailRef = editForm.get('email')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.email"
+            >Email</label
+          >
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (emailRef.invalid && (emailRef.dirty || emailRef.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_description"
+            jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.description"
+            >Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_certifie" jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.certifie"
+            >Certifie</label
+          >
+          <input type="checkbox" class="form-check" name="certifie" id="field_certifie" data-cy="certifie" formControlName="certifie" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_password" jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.password"
+            >Password</label
+          >
+          <input type="text" class="form-control" name="password" id="field_password" data-cy="password" formControlName="password" />
+        </div>
+
+        @let passwordHashRef = editForm.get('passwordHash')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_passwordHash"
+            jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.passwordHash"
+            >Password Hash</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="passwordHash"
+            id="field_passwordHash"
+            data-cy="passwordHash"
+            formControlName="passwordHash"
+          />
+          @if (passwordHashRef.invalid && (passwordHashRef.dirty || passwordHashRef.touched)) {
+            <div>
+              @if (editForm.get('passwordHash')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_keycloakId"
+            jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.keycloakId"
+            >Keycloak Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="keycloakId"
+            id="field_keycloakId"
+            data-cy="keycloakId"
+            formControlName="keycloakId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_user" jhiTranslate="userManagementServiceApp.userManagementServiceConseiller.user"
+            >User</label
+          >
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
