@@ -74,6 +74,21 @@ public class ConseillerService {
     public ConseillerDTO save(ConseillerDTO conseillerDTO) {
         LOG.debug("Request to save Conseiller : {}", conseillerDTO);
 
+        // Vérification de la présence de l'email
+        if (conseillerDTO.getEmail() == null || conseillerDTO.getEmail().trim().isEmpty()) {
+            LOG.error("Tentative de création d'un conseiller sans email");
+            throw new IllegalArgumentException("L'email est obligatoire pour créer un conseiller");
+        }
+
+        // Vérification si l'email existe déjà dans la base de données locale
+        Optional<Conseiller> existingEleve = conseillerRepository.findByEmail(conseillerDTO.getEmail());
+        if (existingEleve.isPresent()) {
+            LOG.warn("Un élève avec l'email {} existe déjà - ID: {}", conseillerDTO.getEmail(), existingEleve.get().getId());
+            throw new IllegalArgumentException("Un élève avec cet email existe déjà");
+        }
+
+        LOG.info("Email validé: {}", conseillerDTO.getEmail());
+
         // Authentification Keycloak
         LOG.info("Authentification Keycloak...");
         String accessToken = authentificationByToken.authentificationFonction(

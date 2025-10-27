@@ -37,4 +37,6 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
 
     @Query("select etudiant from Etudiant etudiant left join fetch etudiant.user where etudiant.id =:id")
     Optional<Etudiant> findOneWithToOneRelationships(@Param("id") Long id);
+
+    Optional<Etudiant> findByEmail(String email);
 }

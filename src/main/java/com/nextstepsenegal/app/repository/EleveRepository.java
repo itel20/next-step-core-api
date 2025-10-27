@@ -34,4 +34,6 @@ public interface EleveRepository extends JpaRepository<Eleve, Long> {
 
     @Query("select eleve from Eleve eleve left join fetch eleve.user where eleve.id =:id")
     Optional<Eleve> findOneWithToOneRelationships(@Param("id") Long id);
+
+    Optional<Eleve> findByEmail(String email);
 }

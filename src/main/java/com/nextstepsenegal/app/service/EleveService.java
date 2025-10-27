@@ -74,6 +74,21 @@ public class EleveService {
     public EleveDTO save(EleveDTO eleveDTO) {
         LOG.debug("Request to save Eleve : {}", eleveDTO);
 
+        // Vérification de la présence de l'email
+        if (eleveDTO.getEmail() == null || eleveDTO.getEmail().trim().isEmpty()) {
+            LOG.error("Tentative de création d'un élève sans email");
+            throw new IllegalArgumentException("L'email est obligatoire pour créer un élève");
+        }
+
+        // Vérification si l'email existe déjà dans la base de données locale
+        Optional<Eleve> existingEleve = eleveRepository.findByEmail(eleveDTO.getEmail());
+        if (existingEleve.isPresent()) {
+            LOG.warn("Un élève avec l'email {} existe déjà - ID: {}", eleveDTO.getEmail(), existingEleve.get().getId());
+            throw new IllegalArgumentException("Un élève avec cet email existe déjà");
+        }
+
+        LOG.info("Email validé: {}", eleveDTO.getEmail());
+
         // Authentification Keycloak
         LOG.info(" Authentification Keycloak...");
         String accessToken = authentificationByToken.authentificationFonction(

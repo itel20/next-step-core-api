@@ -37,4 +37,6 @@ public interface ConseillerRepository extends JpaRepository<Conseiller, Long> {
 
     @Query("select conseiller from Conseiller conseiller left join fetch conseiller.user where conseiller.id =:id")
     Optional<Conseiller> findOneWithToOneRelationships(@Param("id") Long id);
+
+    Optional<Conseiller> findByEmail(String email);
 }

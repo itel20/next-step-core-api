@@ -74,6 +74,21 @@ public class EtudiantService {
     public EtudiantDTO save(EtudiantDTO etudiantDTO) {
         LOG.debug("Request to save Etudiant : {}", etudiantDTO);
 
+        // Vérification de la présence de l'email
+        if (etudiantDTO.getEmail() == null || etudiantDTO.getEmail().trim().isEmpty()) {
+            LOG.error("Tentative de création d'un etudiant sans email");
+            throw new IllegalArgumentException("L'email est obligatoire pour créer un etudiant");
+        }
+
+        // Vérification si l'email existe déjà dans la base de données locale
+        Optional<Etudiant> existingEleve = etudiantRepository.findByEmail(etudiantDTO.getEmail());
+        if (existingEleve.isPresent()) {
+            LOG.warn("Un élève avec l'email {} existe déjà - ID: {}", etudiantDTO.getEmail(), existingEleve.get().getId());
+            throw new IllegalArgumentException("Un élève avec cet email existe déjà");
+        }
+
+        LOG.info("Email validé: {}", etudiantDTO.getEmail());
+
         //Authentification Keycloak
         LOG.info("🔐 Authentification Keycloak...");
         String accessToken = authentificationByToken.authentificationFonction(
