@@ -1,0 +1,34 @@
+{
+  "userManagementServiceApp": {
+    "userManagementServiceConseiller": {
+      "home": {
+        "title": "Conseillers",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Conseiller",
+        "createOrEditLabel": "Créer ou éditer un Conseiller",
+        "search": "Recherche pour Conseiller",
+        "notFound": "Aucun Conseiller trouvé"
+      },
+      "created": "Un nouveau Conseiller a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Conseiller avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Conseiller avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Conseiller {{ id }} ?"
+      },
+      "detail": {
+        "title": "Conseiller"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "specialite": "Specialite",
+      "email": "Email",
+      "description": "Description",
+      "certifie": "Certifie",
+      "password": "Password",
+      "passwordHash": "Password Hash",
+      "keycloakId": "Keycloak Id",
+      "user": "User"
+    }
+  }
+}

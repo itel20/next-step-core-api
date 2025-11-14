@@ -1,0 +1,38 @@
+{
+  "userManagementServiceApp": {
+    "userManagementServiceEleve": {
+      "home": {
+        "title": "Eleves",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Eleve",
+        "createOrEditLabel": "Créer ou éditer un Eleve",
+        "search": "Recherche pour Eleve",
+        "notFound": "Aucun Eleve trouvé"
+      },
+      "created": "Un nouveau Eleve a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Eleve avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Eleve avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Eleve {{ id }} ?"
+      },
+      "detail": {
+        "title": "Eleve"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "dateNaissance": "Date Naissance",
+      "telephone": "Telephone",
+      "adresse": "Adresse",
+      "email": "Email",
+      "serie": "Serie",
+      "niveauEtude": "Niveau Etude",
+      "lycee": "Lycee",
+      "ville": "Ville",
+      "password": "Password",
+      "passwordHash": "Password Hash",
+      "keycloakId": "Keycloak Id",
+      "user": "User"
+    }
+  }
+}

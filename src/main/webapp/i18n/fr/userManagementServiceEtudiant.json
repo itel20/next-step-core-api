@@ -1,0 +1,39 @@
+{
+  "userManagementServiceApp": {
+    "userManagementServiceEtudiant": {
+      "home": {
+        "title": "Etudiants",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Etudiant",
+        "createOrEditLabel": "Créer ou éditer un Etudiant",
+        "search": "Recherche pour Etudiant",
+        "notFound": "Aucun Etudiant trouvé"
+      },
+      "created": "Un nouveau Etudiant a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Etudiant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Etudiant avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Etudiant {{ id }} ?"
+      },
+      "detail": {
+        "title": "Etudiant"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "dateNaissance": "Date Naissance",
+      "telephone": "Telephone",
+      "adresse": "Adresse",
+      "email": "Email",
+      "typeBac": "Type Bac",
+      "anneeBac": "Annee Bac",
+      "niveauDetudes": "Niveau Detudes",
+      "universiteSouhaitee": "Universite Souhaitee",
+      "specialiteSouhaitee": "Specialite Souhaitee",
+      "password": "Password",
+      "passwordHash": "Password Hash",
+      "keycloakId": "Keycloak Id",
+      "user": "User"
+    }
+  }
+}

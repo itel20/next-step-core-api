@@ -1,0 +1,53 @@
+entity Etudiant {
+  nom String required,
+  prenom String required,
+  dateNaissance LocalDate,
+  telephone String,
+  adresse String,
+  email String required,
+  typeBac String required,
+  anneeBac Integer,
+  niveauDetudes String,
+  universiteSouhaitee String,
+  specialiteSouhaitee String,
+  password String,
+  passwordHash String required,
+  keycloakId String
+}
+
+entity Eleve {
+  nom String required,
+  prenom String required,
+  dateNaissance LocalDate,
+  telephone String,
+  adresse String,
+  email String required,
+  serie String required,
+  niveauEtude String required,
+  lycee String,
+  ville String,
+  password String,
+  passwordHash String required,
+  keycloakId String
+}
+entity Conseiller{
+  nom String required,
+  prenom String required,
+  specialite String required,
+  email String required,
+  description String,
+  certifie Boolean,
+  password String,
+  passwordHash String required,
+  keycloakId String
+}
+
+relationship OneToOne {
+  Etudiant{user(login)} to User with builtInEntity,
+  Eleve{user(login)} to User with builtInEntity,
+  Conseiller{user(login)} to User with builtInEntity
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination

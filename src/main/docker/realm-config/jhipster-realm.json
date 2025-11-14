@@ -1,7 +1,7 @@
 {
-  "id": "jhipster",
-  "realm": "jhipster",
-  "displayName": "JHipster",
+  "id": "keycloak",
+  "realm": "master",
+  "displayName": "Keycloak",
   "displayNameHtml": "<div class=\"kc-logo-text\"><span>JHipster</span></div>",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
