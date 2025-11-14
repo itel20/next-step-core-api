@@ -295,14 +295,66 @@ public class EleveService {
     }
 
     /**
-     * Delete the eleve by id.
+     * Delete the Eleve by id (Keycloak + Base de données locale).
      *
      * @param id the id of the entity.
      */
+    @Transactional
     public void delete(Long id) {
-        LOG.debug("Request to delete Eleve : {}", id);
+        LOG.debug(" Request to delete Eleve : {}", id);
+
+        // 1 Récupérer l'élève dans la base
+        Eleve eleve = eleveRepository.findById(id).orElseThrow(() -> new RuntimeException("Élève introuvable avec l'ID : " + id));
+
+        // 2 Vérifier s’il a un identifiant Keycloak
+        if (eleve.getKeycloakId() != null) {
+            try {
+                LOG.info(" Suppression de l'utilisateur Keycloak ID: {}", eleve.getKeycloakId());
+
+                // Authentification Keycloak
+                String accessToken = authentificationByToken.authentificationFonction(
+                    applicationProperties.getKcUser(),
+                    applicationProperties.getKcPassword()
+                );
+
+                if (accessToken == null || accessToken.isEmpty()) {
+                    throw new RuntimeException("Échec d'authentification Keycloak - Token null ou vide");
+                }
+
+                // Préparation headers
+                HttpHeaders headers = new HttpHeaders();
+                headers.setBearerAuth(accessToken);
+                headers.setContentType(MediaType.APPLICATION_JSON);
+
+                // URL de suppression Keycloak
+                String deleteUrl =
+                    applicationProperties.getKcBaseUrl() +
+                    "/admin/realms/" +
+                    applicationProperties.getKcRealm() +
+                    "/users/" +
+                    eleve.getKeycloakId();
+
+                LOG.debug("URL suppression Keycloak: {}", deleteUrl);
+
+                restTemplate.exchange(deleteUrl, HttpMethod.DELETE, new HttpEntity<>(headers), Void.class);
+
+                LOG.info(" Utilisateur Keycloak supprimé avec succès: {}", eleve.getKeycloakId());
+            } catch (HttpClientErrorException.NotFound e) {
+                LOG.warn(" Utilisateur Keycloak non trouvé pour ID: {}", eleve.getKeycloakId());
+            } catch (Exception e) {
+                LOG.error(" Erreur lors de la suppression dans Keycloak", e);
+                throw new RuntimeException("Erreur suppression Keycloak: " + e.getMessage(), e);
+            }
+        } else {
+            LOG.warn(" Aucun ID Keycloak associé à cet élève, suppression uniquement en base.");
+        }
+
+        // 3️ Suppression dans la base de données locale
+        LOG.info(" Suppression de l'élève dans la base locale (ID: {})", id);
         eleveRepository.deleteById(id);
         eleveSearchRepository.deleteFromIndexById(id);
+
+        LOG.info(" Élève supprimé avec succès (base locale + Keycloak).");
     }
 
     /**
