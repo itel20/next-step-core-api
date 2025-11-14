@@ -50,8 +50,54 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+   <!-- Création de table Filliere et Metier -->
+      <createTable tableName="filieres">
+        <column name="id" type="BIGINT" autoIncrement="true">
+          <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="titre" type="VARCHAR(255)">
+          <constraints nullable="false"/>
+        </column>
+        <column name="categorie" type="VARCHAR(255)">
+          <constraints nullable="false"/>
+        </column>
+        <column name="description_detaillee" type="TEXT"/>
+        <column name="difficulte" type="INT"/>
+        <column name="taux_emploi" type="DECIMAL(5,2)"/>
+        <column name="satisfaction" type="DECIMAL(3,2)"/>
+        <column name="salaire_moyen" type="DECIMAL(10,2)"/>
+        <column name="duree_formation" type="VARCHAR(50)"/>
+        <column name="temoignages" type="TEXT"/>
+        <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        <column name="last_modified_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+      </createTable>
 
-        <addPrimaryKey columnNames="user_id, authority_name" tableName="jhi_user_authority"/>
+      <!-- Table universites -->
+      <createTable tableName="filiere_universites">
+        <column name="filiere_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="universites" type="VARCHAR(255)"/>
+      </createTable>
+
+
+      <!-- Table debouches -->
+      <createTable tableName="filiere_debouches">
+        <column name="filiere_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="debouches" type="VARCHAR(255)"/>
+      </createTable>
+
+      <!-- Table competences -->
+      <createTable tableName="filiere_competences">
+        <column name="filiere_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="competences" type="VARCHAR(255)"/>
+      </createTable>
+
+      <addPrimaryKey columnNames="user_id, authority_name" tableName="jhi_user_authority"/>
 
         <addForeignKeyConstraint baseColumnNames="authority_name"
                                  baseTableName="jhi_user_authority"
