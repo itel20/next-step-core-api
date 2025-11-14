@@ -135,4 +135,4 @@ application:
   kc-role: 'http://localhost:9080/admin/realms/jhipster/roles'
   kc-url1: 'http://localhost:9080/admin/realms/jhipster/users'
   kc-base-url: 'http://localhost:9080'
-  kc-realm: 'master'
+  kc-realm: 'jhipster'

@@ -84,7 +84,7 @@ public class ConseillerService {
         Optional<Conseiller> existingEleve = conseillerRepository.findByEmail(conseillerDTO.getEmail());
         if (existingEleve.isPresent()) {
             LOG.warn("Un élève avec l'email {} existe déjà - ID: {}", conseillerDTO.getEmail(), existingEleve.get().getId());
-            throw new IllegalArgumentException("Un élève avec cet email existe déjà");
+            throw new IllegalArgumentException("Un conseiller avec cet email existe déjà");
         }
 
         LOG.info("Email validé: {}", conseillerDTO.getEmail());

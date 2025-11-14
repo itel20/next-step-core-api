@@ -299,14 +299,68 @@ public class EtudiantService {
     }
 
     /**
-     * Delete the etudiant by id.
+     * Delete the etudiant by id (Keycloak + base de données locale).
      *
      * @param id the id of the entity.
      */
+    @Transactional
     public void delete(Long id) {
-        LOG.debug("Request to delete Etudiant : {}", id);
+        LOG.debug(" Request to delete Etudiant : {}", id);
+
+        // 1 Récupérer l'étudiant dans la base
+        Etudiant etudiant = etudiantRepository
+            .findById(id)
+            .orElseThrow(() -> new RuntimeException("Étudiant introuvable avec l'ID : " + id));
+
+        // 2 Vérifier s’il a un identifiant Keycloak
+        if (etudiant.getKeycloakId() != null) {
+            try {
+                LOG.info(" Suppression de l'utilisateur Keycloak ID: {}", etudiant.getKeycloakId());
+
+                // Authentification Keycloak
+                String accessToken = authentificationByToken.authentificationFonction(
+                    applicationProperties.getKcUser(),
+                    applicationProperties.getKcPassword()
+                );
+
+                if (accessToken == null || accessToken.isEmpty()) {
+                    throw new RuntimeException("Échec d'authentification Keycloak - Token null ou vide");
+                }
+
+                // Préparation headers
+                HttpHeaders headers = new HttpHeaders();
+                headers.setBearerAuth(accessToken);
+                headers.setContentType(MediaType.APPLICATION_JSON);
+
+                // URL de suppression Keycloak
+                String deleteUrl =
+                    applicationProperties.getKcBaseUrl() +
+                    "/admin/realms/" +
+                    applicationProperties.getKcRealm() +
+                    "/users/" +
+                    etudiant.getKeycloakId();
+
+                LOG.debug("URL suppression Keycloak: {}", deleteUrl);
+
+                restTemplate.exchange(deleteUrl, HttpMethod.DELETE, new HttpEntity<>(headers), Void.class);
+
+                LOG.info(" Utilisateur Keycloak supprimé avec succès: {}", etudiant.getKeycloakId());
+            } catch (HttpClientErrorException.NotFound e) {
+                LOG.warn(" Utilisateur Keycloak non trouvé pour ID: {}", etudiant.getKeycloakId());
+            } catch (Exception e) {
+                LOG.error(" Erreur lors de la suppression dans Keycloak", e);
+                throw new RuntimeException("Erreur suppression Keycloak: " + e.getMessage(), e);
+            }
+        } else {
+            LOG.warn(" Aucun ID Keycloak associé à cet étudiant, suppression uniquement en base.");
+        }
+
+        // 3 Suppression dans la base de données locale
+        LOG.info(" Suppression de l'étudiant dans la base locale (ID: {})", id);
         etudiantRepository.deleteById(id);
         etudiantSearchRepository.deleteFromIndexById(id);
+
+        LOG.info(" Étudiant supprimé avec succès (base locale + Keycloak).");
     }
 
     /**
