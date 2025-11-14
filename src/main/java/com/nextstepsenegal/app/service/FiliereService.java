@@ -39,7 +39,6 @@ public class FiliereService {
     }
     // ✔ MÉTHODE POUR LIRE TOUTES LES FILIÈRES
     public List<Filiere> findAll() {
-       // return filiereRepository.findAll();
         return filiereRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
