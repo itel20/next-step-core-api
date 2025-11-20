@@ -24,8 +24,7 @@ public class EtablissementDTO {
     private Double salaireMoyen;
     private String temoignages;
 
-    // Getters et Setters...
-
+    // Getters & Setters
 
     public String getNom() {
         return nom;
