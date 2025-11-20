@@ -2,6 +2,7 @@ package com.nextstepsenegal.app.web.rest;
 
 import com.nextstepsenegal.app.service.GestionService;
 import com.nextstepsenegal.app.service.dto.StatsReponse;
+import com.nextstepsenegal.app.service.dto.StatsReponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,5 +21,10 @@ public class StatistiquesResource {
     @GetMapping("/stats")
     public ResponseEntity<StatsReponse> getStats() {
         return ResponseEntity.ok(statistiquesService.getAllStats());
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<StatsReponses> getStatistics() {
+        return ResponseEntity.ok(statistiquesService.getAllStatistics());
     }
 }
