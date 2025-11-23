@@ -375,4 +375,13 @@ public class EtudiantService {
         LOG.debug("Request to search for a page of Etudiants for query {}", query);
         return etudiantSearchRepository.search(query, pageable).map(etudiantMapper::toDto);
     }
+
+    /**
+     * Search for etudiant by typebac
+     * @param serie
+     * @return total etudiant
+     */
+    public long countEtudiantsBySerie(String serie) {
+        return etudiantRepository.countByTypeBac(serie);
+    }
 }

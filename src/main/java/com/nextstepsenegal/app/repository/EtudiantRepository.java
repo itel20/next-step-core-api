@@ -39,4 +39,6 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
     Optional<Etudiant> findOneWithToOneRelationships(@Param("id") Long id);
 
     Optional<Etudiant> findByEmail(String email);
+
+    long countByTypeBac(String serie);
 }
