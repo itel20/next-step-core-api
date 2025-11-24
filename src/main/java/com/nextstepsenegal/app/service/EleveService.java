@@ -369,4 +369,13 @@ public class EleveService {
         LOG.debug("Request to search for a page of Eleves for query {}", query);
         return eleveSearchRepository.search(query, pageable).map(eleveMapper::toDto);
     }
+
+    /**
+     * Search for the eleve by serie
+     * @param serie
+     * return total eleve
+     */
+    public long countElevesBySerie(String serie) {
+        return eleveRepository.countBySerie(serie);
+    }
 }

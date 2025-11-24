@@ -36,4 +36,6 @@ public interface EleveRepository extends JpaRepository<Eleve, Long> {
     Optional<Eleve> findOneWithToOneRelationships(@Param("id") Long id);
 
     Optional<Eleve> findByEmail(String email);
+
+    long countBySerie(String serie);
 }
