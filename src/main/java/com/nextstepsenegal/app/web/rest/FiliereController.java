@@ -3,55 +3,48 @@ package com.nextstepsenegal.app.web.rest;
 import com.nextstepsenegal.app.domain.Filiere;
 import com.nextstepsenegal.app.service.FiliereService;
 import com.nextstepsenegal.app.service.dto.FiliereDTO;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/filieres")
 public class FiliereController {
 
-    private final FiliereService filiereService;
+    private final FiliereService service;
 
-    public FiliereController(FiliereService filiereService) {
-        this.filiereService = filiereService;
+    public FiliereController(FiliereService service) {
+        this.service = service;
     }
 
-    // ✔ CRÉATION
     @PostMapping
-    public Filiere create(@RequestBody FiliereDTO dto) {
-        return filiereService.create(dto);
+    public ResponseEntity<Filiere> create(@RequestBody FiliereDTO dto) {
+        return ResponseEntity.ok(service.create(dto));
     }
-    // ✔ READ ALL
+
     @GetMapping
-    public ResponseEntity<List<Filiere>> getAllFilieres() {
-        List<Filiere> filieres = filiereService.findAll();
-        return new ResponseEntity<>(filieres, HttpStatus.OK);
+    public List<Filiere> getAll() {
+        return service.findAll();
     }
 
-    // ✔ READ ONE BY ID
     @GetMapping("/{id}")
-    public ResponseEntity<Filiere> getFiliere(@PathVariable Long id) {
-        Optional<Filiere> filiere = filiereService.findOne(id);
-        return filiere.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<Filiere> getOne(@PathVariable Long id) {
+        return service.findOne(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 
-    // ✔ UPDATE
     @PutMapping("/{id}")
-    public ResponseEntity<Filiere> updateFiliere(@PathVariable Long id, @RequestBody FiliereDTO dto) {
-        Optional<Filiere> updated = filiereService.update(id, dto);
-        return updated.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<Filiere> update(@PathVariable Long id, @RequestBody FiliereDTO dto) {
+        return service.update(id, dto)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 
-    // ✔ DELETE
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFiliere(@PathVariable Long id) {
-        filiereService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

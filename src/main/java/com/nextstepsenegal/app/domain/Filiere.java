@@ -1,7 +1,6 @@
 package com.nextstepsenegal.app.domain;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -14,34 +13,42 @@ public class Filiere {
 
     private String titre;
 
-    private String categorie;
+    private String domaine;
 
     @Column(columnDefinition = "TEXT")
-    private String descriptionDetaillee;
+    private String descriptionFormation;
 
-    private Integer difficulte;
+    private Integer difficulte; // /10
 
     private Integer tauxEmploi;
 
-    private Double satisfaction;
+    private Integer tauxSatisfaction;
 
-    private Double salaireMoyen;
+    private Double salaireMin;
 
-    private String dureeFormation;
+    private Double salaireMax;
+
+    private Integer dureeFormation; // en années
 
     @ElementCollection
-    private List<String> universites;
+    @CollectionTable(name = "filiere_ecoles", joinColumns = @JoinColumn(name = "filiere_id"))
+    @Column(name = "ecole")
+    private List<String> ecoles;
 
     @ElementCollection
+    @CollectionTable(name = "filiere_debouches", joinColumns = @JoinColumn(name = "filiere_id"))
+    @Column(name = "debouche")
     private List<String> debouches;
 
     @ElementCollection
+    @CollectionTable(name = "filiere_competences", joinColumns = @JoinColumn(name = "filiere_id"))
+    @Column(name = "competence")
     private List<String> competences;
 
     @Column(columnDefinition = "TEXT")
     private String temoignages;
 
-    // Getters & Setters
+    // Getters et Setters
 
     public Long getId() {
         return id;
@@ -59,20 +66,12 @@ public class Filiere {
         this.titre = titre;
     }
 
-    public String getCategorie() {
-        return categorie;
+    public String getDescriptionFormation() {
+        return descriptionFormation;
     }
 
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-
-    public String getDescriptionDetaillee() {
-        return descriptionDetaillee;
-    }
-
-    public void setDescriptionDetaillee(String descriptionDetaillee) {
-        this.descriptionDetaillee = descriptionDetaillee;
+    public void setDescriptionFormation(String descriptionFormation) {
+        this.descriptionFormation = descriptionFormation;
     }
 
     public Integer getDifficulte() {
@@ -91,36 +90,44 @@ public class Filiere {
         this.tauxEmploi = tauxEmploi;
     }
 
-    public Double getSatisfaction() {
-        return satisfaction;
+    public Integer getTauxSatisfaction() {
+        return tauxSatisfaction;
     }
 
-    public void setSatisfaction(Double satisfaction) {
-        this.satisfaction = satisfaction;
+    public void setTauxSatisfaction(Integer tauxSatisfaction) {
+        this.tauxSatisfaction = tauxSatisfaction;
     }
 
-    public Double getSalaireMoyen() {
-        return salaireMoyen;
+    public Double getSalaireMin() {
+        return salaireMin;
     }
 
-    public void setSalaireMoyen(Double salaireMoyen) {
-        this.salaireMoyen = salaireMoyen;
+    public void setSalaireMin(Double salaireMin) {
+        this.salaireMin = salaireMin;
     }
 
-    public String getDureeFormation() {
+    public Double getSalaireMax() {
+        return salaireMax;
+    }
+
+    public void setSalaireMax(Double salaireMax) {
+        this.salaireMax = salaireMax;
+    }
+
+    public Integer getDureeFormation() {
         return dureeFormation;
     }
 
-    public void setDureeFormation(String dureeFormation) {
+    public void setDureeFormation(Integer dureeFormation) {
         this.dureeFormation = dureeFormation;
     }
 
-    public List<String> getUniversites() {
-        return universites;
+    public List<String> getEcoles() {
+        return ecoles;
     }
 
-    public void setUniversites(List<String> universites) {
-        this.universites = universites;
+    public void setEcoles(List<String> ecoles) {
+        this.ecoles = ecoles;
     }
 
     public List<String> getDebouches() {
@@ -129,6 +136,14 @@ public class Filiere {
 
     public void setDebouches(List<String> debouches) {
         this.debouches = debouches;
+    }
+
+    public String getDomaine() {
+        return domaine;
+    }
+
+    public void setDomaine(String domaine) {
+        this.domaine = domaine;
     }
 
     public List<String> getCompetences() {
