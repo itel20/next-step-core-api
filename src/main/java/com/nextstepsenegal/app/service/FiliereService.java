@@ -12,62 +12,60 @@ import java.util.Optional;
 @Service
 public class FiliereService {
 
-    private final FiliereRepository filiereRepository;
+    private final FiliereRepository repository;
 
-    public FiliereService(FiliereRepository filiereRepository) {
-        this.filiereRepository = filiereRepository;
+    public FiliereService(FiliereRepository repository) {
+        this.repository = repository;
     }
 
-    // ✔ MÉTHODE DE CRÉATION
     public Filiere create(FiliereDTO dto) {
-
         Filiere filiere = new Filiere();
+
         filiere.setTitre(dto.getTitre());
-        filiere.setCategorie(dto.getCategorie());
-        filiere.setDescriptionDetaillee(dto.getDescriptionDetaillee());
+        filiere.setDomaine(dto.getDomaine());
+        filiere.setDescriptionFormation(dto.getDescriptionFormation());
         filiere.setDifficulte(dto.getDifficulte());
         filiere.setTauxEmploi(dto.getTauxEmploi());
-        filiere.setSatisfaction(dto.getSatisfaction());
-        filiere.setSalaireMoyen(dto.getSalaireMoyen());
+        filiere.setTauxSatisfaction(dto.getTauxSatisfaction());
+        filiere.setSalaireMin(dto.getSalaireMin());
+        filiere.setSalaireMax(dto.getSalaireMax());
         filiere.setDureeFormation(dto.getDureeFormation());
-        filiere.setUniversites(dto.getUniversites());
+        filiere.setEcoles(dto.getEcoles());
         filiere.setDebouches(dto.getDebouches());
         filiere.setCompetences(dto.getCompetences());
         filiere.setTemoignages(dto.getTemoignages());
 
-        return filiereRepository.save(filiere);
+        return repository.save(filiere);
     }
-    // ✔ MÉTHODE POUR LIRE TOUTES LES FILIÈRES
+
     public List<Filiere> findAll() {
-        return filiereRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
-    // ✔ MÉTHODE POUR LIRE UNE FILIÈRE PAR ID
     public Optional<Filiere> findOne(Long id) {
-        return filiereRepository.findById(id);
+        return repository.findById(id);
     }
 
-    // ✔ MÉTHODE DE MISE À JOUR
     public Optional<Filiere> update(Long id, FiliereDTO dto) {
-        return filiereRepository.findById(id).map(filiere -> {
+        return repository.findById(id).map(filiere -> {
             filiere.setTitre(dto.getTitre());
-            filiere.setCategorie(dto.getCategorie());
-            filiere.setDescriptionDetaillee(dto.getDescriptionDetaillee());
+            filiere.setDomaine(dto.getDomaine());
+            filiere.setDescriptionFormation(dto.getDescriptionFormation());
             filiere.setDifficulte(dto.getDifficulte());
             filiere.setTauxEmploi(dto.getTauxEmploi());
-            filiere.setSatisfaction(dto.getSatisfaction());
-            filiere.setSalaireMoyen(dto.getSalaireMoyen());
+            filiere.setTauxSatisfaction(dto.getTauxSatisfaction());
+            filiere.setSalaireMin(dto.getSalaireMin());
+            filiere.setSalaireMax(dto.getSalaireMax());
             filiere.setDureeFormation(dto.getDureeFormation());
-            filiere.setUniversites(dto.getUniversites());
+            filiere.setEcoles(dto.getEcoles());
             filiere.setDebouches(dto.getDebouches());
             filiere.setCompetences(dto.getCompetences());
             filiere.setTemoignages(dto.getTemoignages());
-            return filiereRepository.save(filiere);
+            return repository.save(filiere);
         });
     }
 
-    // ✔ MÉTHODE DE SUPPRESSION
     public void delete(Long id) {
-        filiereRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }

@@ -5,22 +5,20 @@ import java.util.List;
 public class FiliereDTO {
 
     private String titre;
-    private String categorie;
-    private String descriptionDetaillee;
+    private String domaine;
+    private String descriptionFormation;
     private Integer difficulte;
     private Integer tauxEmploi;
-    private Double satisfaction;
-    private Double salaireMoyen;
-    private String dureeFormation;
-
-    private List<String> universites;
+    private Integer tauxSatisfaction;
+    private Double salaireMin;
+    private Double salaireMax;
+    private Integer dureeFormation;
+    private List<String> ecoles;
     private List<String> debouches;
     private List<String> competences;
-
     private String temoignages;
 
     // Getters & Setters
-
 
     public String getTitre() {
         return titre;
@@ -30,20 +28,20 @@ public class FiliereDTO {
         this.titre = titre;
     }
 
-    public String getCategorie() {
-        return categorie;
+    public String getDomaine() {
+        return domaine;
     }
 
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
+    public void setDomaine(String domaine) {
+        this.domaine = domaine;
     }
 
-    public String getDescriptionDetaillee() {
-        return descriptionDetaillee;
+    public String getDescriptionFormation() {
+        return descriptionFormation;
     }
 
-    public void setDescriptionDetaillee(String descriptionDetaillee) {
-        this.descriptionDetaillee = descriptionDetaillee;
+    public void setDescriptionFormation(String descriptionFormation) {
+        this.descriptionFormation = descriptionFormation;
     }
 
     public Integer getDifficulte() {
@@ -62,36 +60,44 @@ public class FiliereDTO {
         this.tauxEmploi = tauxEmploi;
     }
 
-    public Double getSatisfaction() {
-        return satisfaction;
+    public Integer getTauxSatisfaction() {
+        return tauxSatisfaction;
     }
 
-    public void setSatisfaction(Double satisfaction) {
-        this.satisfaction = satisfaction;
+    public void setTauxSatisfaction(Integer tauxSatisfaction) {
+        this.tauxSatisfaction = tauxSatisfaction;
     }
 
-    public Double getSalaireMoyen() {
-        return salaireMoyen;
+    public Double getSalaireMin() {
+        return salaireMin;
     }
 
-    public void setSalaireMoyen(Double salaireMoyen) {
-        this.salaireMoyen = salaireMoyen;
+    public void setSalaireMin(Double salaireMin) {
+        this.salaireMin = salaireMin;
     }
 
-    public String getDureeFormation() {
+    public Double getSalaireMax() {
+        return salaireMax;
+    }
+
+    public void setSalaireMax(Double salaireMax) {
+        this.salaireMax = salaireMax;
+    }
+
+    public Integer getDureeFormation() {
         return dureeFormation;
     }
 
-    public void setDureeFormation(String dureeFormation) {
+    public void setDureeFormation(Integer dureeFormation) {
         this.dureeFormation = dureeFormation;
     }
 
-    public List<String> getUniversites() {
-        return universites;
+    public List<String> getEcoles() {
+        return ecoles;
     }
 
-    public void setUniversites(List<String> universites) {
-        this.universites = universites;
+    public void setEcoles(List<String> ecoles) {
+        this.ecoles = ecoles;
     }
 
     public List<String> getDebouches() {
