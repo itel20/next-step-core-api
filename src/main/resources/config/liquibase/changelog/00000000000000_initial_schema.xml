@@ -123,29 +123,19 @@
         <column name="id" type="BIGINT" autoIncrement="true">
           <constraints primaryKey="true" nullable="false"/>
         </column>
-        <column name="titre" type="VARCHAR(255)">
-          <constraints nullable="false"/>
-        </column>
+        <column name="titre" type="VARCHAR(255)"/>
         <column name="type" type="VARCHAR(50)"/>
-        <column name="montant" type="DECIMAL(10,2)"/>
-        <column name="periodicite" type="VARCHAR(50)"/>
+        <column name="type_bourse" type="VARCHAR(50)"/>
         <column name="nombre_beneficiaires" type="INT"/>
-        <column name="taux_acceptation" type="DECIMAL(5,2)"/>
+        <column name="taux_accepte" type="DOUBLE"/>
         <column name="date_limite" type="DATE"/>
-        <column name="conseils_pratiques" type="TEXT"/>
-        <column name="favoris" type="BOOLEAN" defaultValueBoolean="false"/>
-        <column name="created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
-        <column name="last_modified_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
       </createTable>
 
-      <!-- Table des critères d'éligibilité -->
-      <createTable tableName="bourse_concours_criteres_eligibilite">
-        <column name="bourse_concours_id" type="BIGINT">
-          <constraints nullable="false"/>
-        </column>
-        <column name="criteres_eligibilite" type="VARCHAR(255)"/>
+      <!-- table pour les critères -->
+      <createTable tableName="bourse_criteres">
+        <column name="bourse_id" type="BIGINT"/>
+        <column name="critere" type="VARCHAR(255)"/>
       </createTable>
-
       <!-- Table des tags -->
       <createTable tableName="bourse_concours_tags">
         <column name="bourse_concours_id" type="BIGINT">

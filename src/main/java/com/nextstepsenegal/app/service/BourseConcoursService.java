@@ -22,15 +22,11 @@ public class BourseConcoursService {
         BourseConcours bc = new BourseConcours();
         bc.setTitre(dto.getTitre());
         bc.setType(dto.getType());
-        bc.setMontant(dto.getMontant());
-        bc.setPeriodicite(dto.getPeriodicite());
+        bc.setTypeBourse(dto.getTypeBourse());
         bc.setNombreBeneficiaires(dto.getNombreBeneficiaires());
-        bc.setTauxAcceptation(dto.getTauxAcceptation());
+        bc.setTauxAccepte(dto.getTauxAccepte());
         bc.setDateLimite(dto.getDateLimite());
-        bc.setCriteresEligibilite(dto.getCriteresEligibilite());
-        bc.setTags(dto.getTags());
-        bc.setConseilsPratiques(dto.getConseilsPratiques());
-        bc.setFavoris(dto.getFavoris());
+        bc.setCriteres(dto.getCriteres());
         return repository.save(bc);
     }
 
@@ -49,15 +45,11 @@ public class BourseConcoursService {
         return repository.findById(id).map(bc -> {
             bc.setTitre(dto.getTitre());
             bc.setType(dto.getType());
-            bc.setMontant(dto.getMontant());
-            bc.setPeriodicite(dto.getPeriodicite());
+            bc.setTypeBourse(dto.getTypeBourse());
             bc.setNombreBeneficiaires(dto.getNombreBeneficiaires());
-            bc.setTauxAcceptation(dto.getTauxAcceptation());
+            bc.setTauxAccepte(dto.getTauxAccepte());
             bc.setDateLimite(dto.getDateLimite());
-            bc.setCriteresEligibilite(dto.getCriteresEligibilite());
-            bc.setTags(dto.getTags());
-            bc.setConseilsPratiques(dto.getConseilsPratiques());
-            bc.setFavoris(dto.getFavoris());
+            bc.setCriteres(dto.getCriteres());
             return repository.save(bc);
         });
     }
