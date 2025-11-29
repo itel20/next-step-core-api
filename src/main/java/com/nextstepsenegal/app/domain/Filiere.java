@@ -1,6 +1,7 @@
 package com.nextstepsenegal.app.domain;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,20 +31,20 @@ public class Filiere {
 
     private Integer dureeFormation; // en années
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "filiere_ecoles", joinColumns = @JoinColumn(name = "filiere_id"))
     @Column(name = "ecole")
-    private List<String> ecoles;
+    private List<String> ecoles = new ArrayList<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "filiere_debouches", joinColumns = @JoinColumn(name = "filiere_id"))
     @Column(name = "debouche")
-    private List<String> debouches;
+    private List<String> debouches = new ArrayList<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "filiere_competences", joinColumns = @JoinColumn(name = "filiere_id"))
     @Column(name = "competence")
-    private List<String> competences;
+    private List<String> competences = new ArrayList<>();
 
     @Column(columnDefinition = "TEXT")
     private String temoignages;
