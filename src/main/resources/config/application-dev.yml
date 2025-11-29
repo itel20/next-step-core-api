@@ -127,12 +127,11 @@ jhipster:
 # ===================================================================
 
 application:
-  kc-password: admin
+  kc-url: 'http://localhost:9080/realms/master/protocol/openid-connect/token'
   kc-user: admin
+  kc-password: admin
   kc-client-id: internal
   kc-client-secret: internal
-  kc-url: 'http://localhost:8080/realms/master/protocol/openid-connect/token'
-  kc-role: 'http://localhost:8080/admin/realms/jhipster/roles'
-  kc-url1: 'http://localhost:8080/admin/realms/jhipster/users'
-  kc-base-url: 'http://localhost:8080'
+  kc-url1: 'http://localhost:9080/admin/realms/jhipster/users'
+  kc-base-url: 'http://localhost:9080'
   kc-realm: 'jhipster'

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class FiliereDTO {
 
+    private Long id;
     private String titre;
     private String domaine;
     private String descriptionFormation;
@@ -19,6 +20,14 @@ public class FiliereDTO {
     private String temoignages;
 
     // Getters & Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitre() {
         return titre;

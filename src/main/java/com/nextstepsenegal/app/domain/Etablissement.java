@@ -1,6 +1,7 @@
 package com.nextstepsenegal.app.domain;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,8 +29,8 @@ public class Etablissement {
     private Double fraisScolarite;
     private Double tauxSelectivite;
 
-    @ElementCollection
-    private List<String> filieresDisponibles;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> filieresDisponibles = new ArrayList<>();
 
     // Processus d'admission
     private String processusAdmission;

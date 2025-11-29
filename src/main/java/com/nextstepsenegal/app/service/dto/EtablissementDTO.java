@@ -1,5 +1,6 @@
 package com.nextstepsenegal.app.service.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EtablissementDTO {
@@ -14,7 +15,7 @@ public class EtablissementDTO {
     private String laboratoiresBibliotheques;
     private Double fraisScolarite;
     private Double tauxSelectivite;
-    private List<String> filieresDisponibles;
+    private List<String> filieresDisponibles = new ArrayList<>();
     private String processusAdmission;
     private Double tauxAcceptation;
     private String pointsBacRequis;
