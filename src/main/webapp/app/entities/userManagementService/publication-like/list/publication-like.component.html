@@ -1,0 +1,180 @@
+<div>
+  <h2 id="page-heading" data-cy="PublicationLikeHeading">
+    <span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.home.title">PublicationLikes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-publication-like"
+        [routerLink]="['/usermanagementservice/publication-like/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.home.createLabel"
+          >Créer un nouveau Publication Like</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label
+          class="visually-hidden"
+          for="currentSearch"
+          jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.home.search"
+          >Recherche pour Publication Like</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'userManagementServiceApp.userManagementServicePublicationLike.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (publicationLikes?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.home.notFound">Aucun Publication Like trouvé</span>
+    </div>
+  }
+
+  @if (publicationLikes && publicationLikes.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userId">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.userId">User Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userType">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.userType">User Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="likedAt">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.likedAt">Liked At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="publication.id">
+              <div class="d-flex">
+                <span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.publication">Publication</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (publicationLike of publicationLikes; track trackId(publicationLike)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/usermanagementservice/publication-like', publicationLike.id, 'view']">{{ publicationLike.id }}</a>
+              </td>
+              <td>{{ publicationLike.userId }}</td>
+              <td [jhiTranslate]="'userManagementServiceApp.UserType.' + (publicationLike.userType ?? 'null')">
+                {{ { null: '', ETUDIANT: 'ETUDIANT', ELEVE: 'ELEVE', CONSEILLER: 'CONSEILLER' }[publicationLike.userType ?? 'null'] }}
+              </td>
+              <td>{{ publicationLike.likedAt | formatMediumDatetime }}</td>
+              <td>
+                @if (publicationLike.publication) {
+                  <div>
+                    <a [routerLink]="['/usermanagementservice/publication', publicationLike.publication.id, 'view']">{{
+                      publicationLike.publication.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/usermanagementservice/publication-like', publicationLike.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/usermanagementservice/publication-like', publicationLike.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(publicationLike)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (publicationLikes && publicationLikes.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

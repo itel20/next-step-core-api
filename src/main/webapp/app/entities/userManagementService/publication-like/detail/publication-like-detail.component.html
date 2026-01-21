@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (publicationLike(); as publicationLikeRef) {
+      <div>
+        <h2 data-cy="publicationLikeDetailsHeading">
+          <span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.detail.title">Publication Like</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ publicationLikeRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.userId">User Id</span></dt>
+          <dd>
+            <span>{{ publicationLikeRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.userType">User Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'userManagementServiceApp.UserType.' + (publicationLikeRef.userType ?? 'null')">{{
+              { null: '', ETUDIANT: 'ETUDIANT', ELEVE: 'ELEVE', CONSEILLER: 'CONSEILLER' }[publicationLikeRef.userType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.likedAt">Liked At</span></dt>
+          <dd>
+            <span>{{ publicationLikeRef.likedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublicationLike.publication">Publication</span></dt>
+          <dd>
+            @if (publicationLike()!.publication) {
+              <div>
+                <a [routerLink]="['/usermanagementservice/publication', publicationLike()!.publication?.id, 'view']">{{
+                  publicationLikeRef.publication?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/usermanagementservice/publication-like', publicationLikeRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (publicationShare(); as publicationShareRef) {
+      <div>
+        <h2 data-cy="publicationShareDetailsHeading">
+          <span jhiTranslate="userManagementServiceApp.userManagementServicePublicationShare.detail.title">Publication Share</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ publicationShareRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublicationShare.userId">User Id</span></dt>
+          <dd>
+            <span>{{ publicationShareRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublicationShare.userType">User Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'userManagementServiceApp.UserType.' + (publicationShareRef.userType ?? 'null')">{{
+              { null: '', ETUDIANT: 'ETUDIANT', ELEVE: 'ELEVE', CONSEILLER: 'CONSEILLER' }[publicationShareRef.userType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublicationShare.sharedAt">Shared At</span></dt>
+          <dd>
+            <span>{{ publicationShareRef.sharedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublicationShare.publication">Publication</span></dt>
+          <dd>
+            @if (publicationShare()!.publication) {
+              <div>
+                <a [routerLink]="['/usermanagementservice/publication', publicationShare()!.publication?.id, 'view']">{{
+                  publicationShareRef.publication?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/usermanagementservice/publication-share', publicationShareRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

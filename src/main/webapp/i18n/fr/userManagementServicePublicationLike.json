@@ -1,0 +1,28 @@
+{
+  "userManagementServiceApp": {
+    "userManagementServicePublicationLike": {
+      "home": {
+        "title": "PublicationLikes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Publication Like",
+        "createOrEditLabel": "Créer ou éditer un Publication Like",
+        "search": "Recherche pour Publication Like",
+        "notFound": "Aucun Publication Like trouvé"
+      },
+      "created": "Un nouveau Publication Like a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Publication Like avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Publication Like avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Publication Like {{ id }} ?"
+      },
+      "detail": {
+        "title": "Publication Like"
+      },
+      "id": "ID",
+      "userId": "User Id",
+      "userType": "User Type",
+      "likedAt": "Liked At",
+      "publication": "Publication"
+    }
+  }
+}

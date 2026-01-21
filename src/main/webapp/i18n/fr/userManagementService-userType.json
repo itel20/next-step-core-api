@@ -1,0 +1,10 @@
+{
+  "userManagementServiceApp": {
+    "UserType": {
+      "null": "",
+      "ETUDIANT": "ETUDIANT",
+      "ELEVE": "ELEVE",
+      "CONSEILLER": "CONSEILLER"
+    }
+  }
+}

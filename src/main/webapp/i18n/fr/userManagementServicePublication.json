@@ -1,0 +1,28 @@
+{
+  "userManagementServiceApp": {
+    "userManagementServicePublication": {
+      "home": {
+        "title": "Publications",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Publication",
+        "createOrEditLabel": "Créer ou éditer un Publication",
+        "search": "Recherche pour Publication",
+        "notFound": "Aucun Publication trouvé"
+      },
+      "created": "Un nouveau Publication a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Publication avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Publication avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Publication {{ id }} ?"
+      },
+      "detail": {
+        "title": "Publication"
+      },
+      "id": "ID",
+      "content": "Content",
+      "authorId": "Author Id",
+      "authorType": "Author Type",
+      "createdAt": "Created At"
+    }
+  }
+}

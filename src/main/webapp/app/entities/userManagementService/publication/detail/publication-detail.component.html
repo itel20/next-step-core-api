@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (publication(); as publicationRef) {
+      <div>
+        <h2 data-cy="publicationDetailsHeading">
+          <span jhiTranslate="userManagementServiceApp.userManagementServicePublication.detail.title">Publication</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ publicationRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublication.content">Content</span></dt>
+          <dd>
+            <span>{{ publicationRef.content }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublication.authorId">Author Id</span></dt>
+          <dd>
+            <span>{{ publicationRef.authorId }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublication.authorType">Author Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'userManagementServiceApp.UserType.' + (publicationRef.authorType ?? 'null')">{{
+              { null: '', ETUDIANT: 'ETUDIANT', ELEVE: 'ELEVE', CONSEILLER: 'CONSEILLER' }[publicationRef.authorType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="userManagementServiceApp.userManagementServicePublication.createdAt">Created At</span></dt>
+          <dd>
+            <span>{{ publicationRef.createdAt | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/usermanagementservice/publication', publicationRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

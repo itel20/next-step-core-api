@@ -8,9 +8,9 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "userManagementServiceEleve": "Eleve",
-        "userManagementServiceEtudiant": "Etudiant",
-        "userManagementServiceConseiller": "Conseiller"
+        "userManagementServicePublication": "Publication",
+        "userManagementServicePublicationLike": "Publication Like",
+        "userManagementServicePublicationShare": "Publication Share"
       },
       "account": {
         "main": "Account",

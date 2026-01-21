@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20260120205131"
+  },
+  "applications": "*",
+  "clientRootFolder": "userManagementService",
+  "databaseType": "sql",
+  "documentation": "Publication",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "content",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "authorId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "authorType",
+      "fieldType": "UserType",
+      "fieldTypeDocumentation": "Enum pour identifier le type d’utilisateur",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ETUDIANT,ELEVE,CONSEILLER"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "userManagementService",
+  "name": "Publication",
+  "pagination": "pagination",
+  "relationships": [],
+  "service": "serviceClass"
+}

@@ -1,0 +1,52 @@
+
+/**
+ * Enum pour identifier le type d’utilisateur
+ */
+enum UserType {
+  ETUDIANT,
+  ELEVE,
+  CONSEILLER
+}
+
+/**
+ * Publication
+ */
+entity Publication {
+  content TextBlob required
+  authorId Long required
+  authorType UserType required
+  createdAt Instant required
+}
+
+/**
+ * Like d’une publication
+ */
+entity PublicationLike {
+  userId Long required
+  userType UserType required
+  likedAt Instant required
+}
+
+/**
+ * Partage d’une publication
+ */
+entity PublicationShare {
+  userId Long required
+  userType UserType required
+  sharedAt Instant required
+}
+
+/**
+ * Relations
+ */
+relationship ManyToOne {
+  PublicationLike{publication} to Publication
+  PublicationShare{publication} to Publication
+}
+
+/**
+ * Options JHipster
+ */
+paginate * with pagination
+service * with serviceClass
+dto * with mapstruct

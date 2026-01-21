@@ -1,0 +1,28 @@
+{
+  "userManagementServiceApp": {
+    "userManagementServicePublicationShare": {
+      "home": {
+        "title": "Publication Shares",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Publication Share",
+        "createOrEditLabel": "Create or edit a Publication Share",
+        "search": "Search for Publication Share",
+        "notFound": "No Publication Shares found"
+      },
+      "created": "A new Publication Share is created with identifier {{ param }}",
+      "updated": "A Publication Share is updated with identifier {{ param }}",
+      "deleted": "A Publication Share is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Publication Share {{ id }}?"
+      },
+      "detail": {
+        "title": "Publication Share"
+      },
+      "id": "ID",
+      "userId": "User Id",
+      "userType": "User Type",
+      "sharedAt": "Shared At",
+      "publication": "Publication"
+    }
+  }
+}

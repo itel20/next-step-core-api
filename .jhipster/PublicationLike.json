@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20260120205132"
+  },
+  "applications": "*",
+  "clientRootFolder": "userManagementService",
+  "databaseType": "sql",
+  "documentation": "Like d’une publication",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "userId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "userType",
+      "fieldType": "UserType",
+      "fieldTypeDocumentation": "Enum pour identifier le type d’utilisateur",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ETUDIANT,ELEVE,CONSEILLER"
+    },
+    {
+      "fieldName": "likedAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "userManagementService",
+  "name": "PublicationLike",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "publication",
+      "relationshipName": "publication",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}
