@@ -1,5 +1,57 @@
 # userManagementService
 
+# Next Step Senegal — Core Backend Service
+
+The **Core Backend Service** is the main backend component of Next Step, a digital orientation platform designed to help Senegalese students explore educational and career opportunities.
+
+This service is part of a **JHipster-generated microservices architecture**, built with Java and Spring Boot. It provides the core business logic and APIs used by the application, including user management, educational programs, fields of study, and related orientation data.
+
+## Role in the Application
+
+This repository contains the main backend service of the Next Step application.
+
+Its responsibilities include:
+
+* Managing users and user-related data.
+* Providing APIs for educational fields and programs.
+* Managing the data used to support student orientation.
+* Exposing the business logic consumed by the frontend through the API Gateway.
+* Supporting the application's core domain entities and their relationships.
+
+The exact responsibilities of this service are defined by the entities, APIs, and business logic implemented in the codebase.
+
+## Technology Stack
+
+* **Java / Spring Boot**
+* **JHipster 8.7.3**
+* **Docker / Docker Compose**
+* **Keycloak** for authentication, where configured
+* **MySQL** and other infrastructure components, as configured by the application
+
+## Related Repository
+
+The [Next Step API Gateway](https://github.com/itel20/next-step-apigateway) provides the frontend and the main entry point to the application.
+
+The gateway communicates with this backend service to access users, educational fields, programs, and other application data.
+
+## Cloud-Native Development
+
+As part of the ongoing development of Next Step, this service is used to explore:
+
+* Containerized development with Docker.
+* Reproducible builds and testing.
+* CI/CD automation.
+* Microservices operation and deployment.
+* Communication between the frontend gateway and backend services.
+
+The CI/CD section should describe the workflow actually implemented in this repository, including its triggers, build steps, tests, and any image publication or deployment.
+
+## Project Status
+
+This is an ongoing team project. The repository is a public mirror for documentation and technical review.
+
+For development, build, and testing instructions, refer to the JHipster-generated documentation below.
+
 This application was generated using JHipster 8.7.3, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.7.3](https://www.jhipster.tech/documentation-archive/v8.7.3).
 
 This is a "microservice" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
