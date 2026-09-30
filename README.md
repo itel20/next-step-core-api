@@ -44,7 +44,7 @@ As part of the ongoing development of Next Step, this service is used to explore
 * Microservices operation and deployment.
 * Communication between the frontend gateway and backend services.
 
-The CI/CD section should describe the workflow actually implemented in this repository, including its triggers, build steps, tests, and any image publication or deployment.
+
 
 ## Project Status
 
