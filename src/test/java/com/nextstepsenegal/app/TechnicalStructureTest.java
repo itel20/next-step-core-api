@@ -15,7 +15,7 @@ class TechnicalStructureTest {
 
     // prettier-ignore
     @ArchTest
-    @ArchIgnore("Service layer depends on web.rest.errors.BadRequestAlertException — architecture debt to fix before the KubeCon talk (see README)")
+    @ArchIgnore(reason = "Service layer depends on web.rest.errors.BadRequestAlertException — architecture debt to fix before the KubeCon talk (see README)")
     static final ArchRule respectsTechnicalArchitectureLayers = layeredArchitecture()
         .consideringAllDependencies()
         // ... reste inchangé
