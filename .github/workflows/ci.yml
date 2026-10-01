@@ -27,3 +27,30 @@ jobs:
 
       - name: Run unit tests
         run: ./mvnw -ntp test
+
+  docker:
+    needs: build
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make mvnw executable
+        run: chmod +x ./mvnw
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Build and push image
+        run: |
+          ./mvnw -ntp -Pprod verify jib:build \
+            -Djib.to.image=ghcr.io/itel20/next-step-core-api:latest \
+            -Djib.to.auth.username=${{ github.actor }} \
+            -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }}
