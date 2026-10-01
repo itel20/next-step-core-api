@@ -1,6 +1,6 @@
 package com.nextstepsenegal.app;
 
-import org.junit.jupiter.api.Disabled;
+import com.tngtech.archunit.junit.ArchIgnore;
 import static com.tngtech.archunit.base.DescribedPredicate.alwaysTrue;
 import static com.tngtech.archunit.core.domain.JavaClass.Predicates.belongToAnyOf;
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
@@ -11,13 +11,14 @@ import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 
 @AnalyzeClasses(packagesOf = UserManagementServiceApp.class, importOptions = DoNotIncludeTests.class)
-    @Disabled("Service layer depends on web.rest.errors.BadRequestAlertException — architecture debt to fix before the KubeCon talk (see README)")
 class TechnicalStructureTest {
 
     // prettier-ignore
     @ArchTest
+    @ArchIgnore("Service layer depends on web.rest.errors.BadRequestAlertException — architecture debt to fix before the KubeCon talk (see README)")
     static final ArchRule respectsTechnicalArchitectureLayers = layeredArchitecture()
         .consideringAllDependencies()
+        // ... reste inchangé
         .layer("Config").definedBy("..config..")
         .layer("Client").definedBy("..client..")
         .layer("Web").definedBy("..web..")
