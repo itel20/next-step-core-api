@@ -1,3 +1,4 @@
+![CI](https://github.com/itel20/next-step-core-api/actions/workflows/ci.yml/badge.svg)
 # userManagementService
 
 # Next Step Senegal — Core Backend Service
