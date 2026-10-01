@@ -1,6 +1,6 @@
 package com.nextstepsenegal.app.config;
 
-import org.junit.jupiter.api.Disabled;
+
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import java.util.Arrays;
@@ -27,7 +27,6 @@ import tech.jhipster.config.h2.H2ConfigurationHelper;
  * Configuration of web application.
  */
 @Configuration
-@Disabled("CORS returns 403 instead of 200 — Spring Security config investigation in progress (see README)")
 public class WebConfigurer implements ServletContextInitializer {
 
     private static final Logger LOG = LoggerFactory.getLogger(WebConfigurer.class);
