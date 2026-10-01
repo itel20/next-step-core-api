@@ -56,6 +56,14 @@ This application was generated using JHipster 8.7.3, you can find documentation 
 
 This is a "microservice" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
 
+## Known Issues / Lessons Learned
+- **Architecture debt**: `PublicationLikeService` and `PublicationShareService` throw a
+  web-layer exception (`BadRequestAlertException`) directly from the service layer,
+  violating JHipster's default layered architecture rule (caught by ArchUnit).
+  Test temporarily disabled; fix planned before the talk.
+- **CORS configuration**: `WebConfigurerTest` currently fails (expects 200, gets 403).
+  Under investigation.
+
 This application is configured for Service Discovery and Configuration with the JHipster-Registry. On launch, it will refuse to start if it is not able to connect to the JHipster-Registry at [http://localhost:8761](http://localhost:8761). For more information, read our documentation on [Service Discovery and Configuration with the JHipster-Registry][].
 
 ## Project Structure
