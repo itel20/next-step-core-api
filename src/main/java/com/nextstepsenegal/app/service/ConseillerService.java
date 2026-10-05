@@ -83,7 +83,7 @@ public class ConseillerService {
         // Vérification si l'email existe déjà dans la base de données locale
         Optional<Conseiller> existingConseiller = conseillerRepository.findByEmail(conseillerDTO.getEmail());
         if (existingConseiller.isPresent()) {
-            LOG.warn("Un conseiller avec l'email {} existe déjà - ID: {}", conseillerDTO.getEmail(), existingConseiller.get().getId());
+            LOG.warn("Un conseiller avec l'email {} existe déjà - ID: {}", conseillerDTO.getEmail(), existingConseiller.orElseThrow().getId());
             throw new IllegalArgumentException("Un conseiller avec cet email existe déjà");
         }
 
