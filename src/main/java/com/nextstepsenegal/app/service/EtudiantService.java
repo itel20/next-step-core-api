@@ -83,7 +83,7 @@ public class EtudiantService {
         // Vérification si l'email existe déjà dans la base de données locale
         Optional<Etudiant> existingEleve = etudiantRepository.findByEmail(etudiantDTO.getEmail());
         if (existingEleve.isPresent()) {
-            LOG.warn("Un élève avec l'email {} existe déjà - ID: {}", etudiantDTO.getEmail(), existingEleve.get().getId());
+            LOG.warn("Un élève avec l'email {} existe déjà - ID: {}", etudiantDTO.getEmail(), existingEleve.orElseThrow().getId());
             throw new IllegalArgumentException("Un élève avec cet email existe déjà");
         }
 
