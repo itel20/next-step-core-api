@@ -88,8 +88,8 @@ public class PublicationLikeService {
 
         // Si existe → UNLIKE
         if (existingLike.isPresent()) {
-            publicationLikeRepository.delete(existingLike.get());
-            publicationLikeSearchRepository.deleteById(existingLike.get().getId());
+            publicationLikeRepository.delete(existingLike.orElseThrow());
+            publicationLikeSearchRepository.deleteById(existingLike.orElseThrow().getId());
             return Optional.empty(); // unlike
         }
 
