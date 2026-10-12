@@ -308,26 +308,26 @@ class ConseillerResourceIT {
         assertThat(searchDatabaseSizeAfter).isEqualTo(searchDatabaseSizeBefore);
     }
 
-    @Test
-    @Transactional
-    void checkPasswordHashIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        int searchDatabaseSizeBefore = IterableUtil.sizeOf(conseillerSearchRepository.findAll());
-        // set the field null
-        conseiller.setPasswordHash(null);
+@Test
+@Transactional
+void checkPasswordIsRequired() throws Exception {
+    long databaseSizeBeforeTest = getRepositoryCount();
+    int searchDatabaseSizeBefore = IterableUtil.sizeOf(eleveSearchRepository.findAll());
+    // set the field null
+    eleve.setPassword(null);
 
-        // Create the Conseiller, which fails.
-        ConseillerDTO conseillerDTO = conseillerMapper.toDto(conseiller);
+    // Create the Eleve, which fails.
+    EleveDTO eleveDTO = eleveMapper.toDto(eleve);
 
-        restConseillerMockMvc
-            .perform(post(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(conseillerDTO)))
-            .andExpect(status().isBadRequest());
+    restEleveMockMvc
+        .perform(post(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(eleveDTO)))
+        .andExpect(status().isBadRequest());
 
-        assertSameRepositoryCount(databaseSizeBeforeTest);
+    assertSameRepositoryCount(databaseSizeBeforeTest);
 
-        int searchDatabaseSizeAfter = IterableUtil.sizeOf(conseillerSearchRepository.findAll());
-        assertThat(searchDatabaseSizeAfter).isEqualTo(searchDatabaseSizeBefore);
-    }
+    int searchDatabaseSizeAfter = IterableUtil.sizeOf(eleveSearchRepository.findAll());
+    assertThat(searchDatabaseSizeAfter).isEqualTo(searchDatabaseSizeBefore);
+}
 
     @Test
     @Transactional
