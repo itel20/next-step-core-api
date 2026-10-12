@@ -1,5 +1,12 @@
 package com.nextstepsenegal.app.web.rest;
 
+import com.nextstepsenegal.app.domain.AuthentificationByToken;
+import java.net.URI;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import static com.nextstepsenegal.app.domain.EleveAsserts.*;
 import static com.nextstepsenegal.app.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -125,6 +132,12 @@ class EleveResourceIT {
 
     @Autowired
     private MockMvc restEleveMockMvc;
+    // Keycloak est un service externe : on le simule pour que l'IT ne dépende pas d'un serveur réel
+    @MockBean
+    private AuthentificationByToken authentificationByToken;
+
+    @MockBean
+    private RestTemplate restTemplate;
 
     private Eleve eleve;
 
@@ -177,9 +190,13 @@ class EleveResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
-        eleve = createEntity();
-    }
+public void initTest() {
+    eleve = createEntity();
+
+    when(authentificationByToken.authentificationFonction(any(), any())).thenReturn("fake-access-token");
+    when(restTemplate.exchange(nullable(String.class), eq(HttpMethod.POST), any(HttpEntity.class), eq(Void.class)))
+        .thenReturn(ResponseEntity.<Void>created(URI.create("http://keycloak/users/kc-test-id")).build());
+}
 
     @AfterEach
     public void cleanup() {
